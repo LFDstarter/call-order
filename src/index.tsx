@@ -119,7 +119,7 @@ app.get('/', (c) => {
                 <div class="stat-card p-6">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-gray-500 text-sm font-medium">Commandes actives</p>
+                            <p class="text-gray-500 text-sm font-medium">Appels actifs</p>
                             <p class="text-3xl font-bold mt-2" style="color: var(--aqua-dark);" id="active-commands">3</p>
                         </div>
                         <div class="w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg" style="background: linear-gradient(135deg, var(--aqua-primary), var(--aqua-medium));">
@@ -157,33 +157,39 @@ app.get('/', (c) => {
                     <div class="w-8 h-8 rounded-lg flex items-center justify-center mr-3" style="background: linear-gradient(135deg, var(--aqua-primary), var(--aqua-medium));">
                         <i class="fas fa-plus text-white text-sm"></i>
                     </div>
-                    Nouvelle Commande
+                    Nouvel Appel
                 </h2>
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-6 gap-4">
                     <div>
                         <input
                             type="text"
                             id="command-number"
-                            placeholder="N° commande"
+                            placeholder="Numéro"
                             class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 placeholder-gray-400 focus:outline-none focus:bg-white transition-all duration-200"
                             style="focus:ring-2 focus:ring-aqua-primary focus:border-aqua-primary"
                             maxlength="4"
                         />
                     </div>
                     <div>
-                        <select id="counter-select" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 focus:outline-none focus:bg-white transition-all duration-200">
-                            <option value="">Guichet</option>
-                            <option value="counter-1">Comptoir Principal</option>
-                            <option value="counter-2">Drive & Emporter</option>
+                        <select id="service-type-select" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 focus:outline-none focus:bg-white transition-all duration-200">
+                            <option value="Guichet">Guichet</option>
+                            <option value="Service">Service</option>
+                            <option value="Client">Client</option>
                         </select>
                     </div>
                     <div>
                         <input
                             type="text"
                             id="command-message"
-                            placeholder="Message (optionnel)"
+                            placeholder="Message (ex: Veuillez vous présenter)"
                             class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 placeholder-gray-400 focus:outline-none focus:bg-white transition-all duration-200"
                         />
+                    </div>
+                    <div>
+                        <select id="message-position" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 focus:outline-none focus:bg-white transition-all duration-200">
+                            <option value="before">Message avant</option>
+                            <option value="after">Message après</option>
+                        </select>
                     </div>
                     <div>
                         <button
@@ -192,6 +198,16 @@ app.get('/', (c) => {
                         >
                             <i class="fas fa-paper-plane mr-2"></i>
                             Envoyer
+                        </button>
+                    </div>
+                    <div>
+                        <button
+                            onclick="sendNextCommand()"
+                            class="btn-primary w-full font-semibold py-3 px-6 rounded-xl"
+                            style="background: linear-gradient(135deg, #0C7489, #13505B);"
+                        >
+                            <i class="fas fa-arrow-right mr-2"></i>
+                            Suivant
                         </button>
                     </div>
                 </div>
@@ -203,7 +219,7 @@ app.get('/', (c) => {
                     <div class="w-8 h-8 rounded-lg flex items-center justify-center mr-3" style="background: linear-gradient(135deg, var(--aqua-medium), var(--aqua-dark));">
                         <i class="fas fa-list text-white text-sm"></i>
                     </div>
-                    Commandes Actives
+                    Appels Actifs
                 </h2>
                 <div id="commands-list" class="space-y-4">
                     <!-- Les commandes seront chargées ici -->

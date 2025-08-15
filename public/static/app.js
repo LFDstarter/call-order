@@ -269,7 +269,7 @@ class RestaurantDashboard {
         this.updateStatsDisplay();
       }
 
-      // Charger les commandes actives
+      // Charger les appels actifs
       const commandsResponse = await this.apiCall('/commands?status=active');
       if (commandsResponse.success) {
         this.commands = commandsResponse.data.commands || [];
@@ -302,22 +302,22 @@ class RestaurantDashboard {
       listEl.innerHTML = `
         <div class="text-center py-8 text-gray-300">
           <i class="fas fa-clock text-4xl mb-4 opacity-50"></i>
-          <p>Aucune commande active</p>
+          <p>Aucun appel actif</p>
         </div>
       `;
       return;
     }
 
     listEl.innerHTML = this.commands.map(command => `
-      <div class="glass-effect rounded-lg p-4 flex items-center justify-between command-item" data-id="${command.id}">
+      <div class="card-modern p-4 flex items-center justify-between command-item" data-id="${command.id}">
         <div class="flex items-center space-x-4">
-          <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg" style="background: linear-gradient(135deg, #119DA4, #0C7489);">
             <span class="text-white font-bold text-lg">${command.number}</span>
           </div>
           <div>
-            <p class="text-white font-semibold">${command.message || 'Commande n° ' + command.number}</p>
-            <p class="text-gray-300 text-sm">
-              ${command.counter_name || 'Comptoir principal'} • 
+            <p class="font-semibold" style="color: #13505B;">${command.message || 'Appel n° ' + command.number}</p>
+            <p class="text-gray-500 text-sm">
+              ${command.counter_name || 'Service principal'} • 
               ${this.formatDate(command.created_at)}
             </p>
           </div>
@@ -325,14 +325,14 @@ class RestaurantDashboard {
         <div class="flex items-center space-x-2">
           <button
             onclick="dashboard.completeCommand('${command.id}')"
-            class="bg-green-500 hover:bg-green-600 text-white p-2 rounded-lg transition-colors"
-            title="Marquer comme terminée"
+            class="bg-green-500 hover:bg-green-600 text-white p-2 rounded-xl transition-all duration-200 shadow-md hover:shadow-lg"
+            title="Marquer comme terminé"
           >
             <i class="fas fa-check"></i>
           </button>
           <button
             onclick="dashboard.cancelCommand('${command.id}')"
-            class="bg-red-500 hover:bg-red-600 text-white p-2 rounded-lg transition-colors"
+            class="bg-red-500 hover:bg-red-600 text-white p-2 rounded-xl transition-all duration-200 shadow-md hover:shadow-lg"
             title="Annuler"
           >
             <i class="fas fa-times"></i>
@@ -356,15 +356,17 @@ class RestaurantDashboard {
 
   async sendCommand() {
     const numberEl = document.getElementById('command-number');
-    const counterEl = document.getElementById('counter-select');
+    const serviceTypeEl = document.getElementById('service-type-select');
     const messageEl = document.getElementById('command-message');
+    const messagePositionEl = document.getElementById('message-position');
 
     const number = numberEl.value.trim();
-    const counter_id = counterEl.value || null;
-    const message = messageEl.value.trim() || null;
+    const serviceType = serviceTypeEl.value;
+    const userMessage = messageEl.value.trim();
+    const messagePosition = messagePositionEl.value;
 
     if (!number) {
-      this.showNotification('Veuillez saisir un numéro de commande', 'error');
+      this.showNotification('Veuillez saisir un numéro', 'error');
       return;
     }
 
@@ -373,20 +375,30 @@ class RestaurantDashboard {
       return;
     }
 
+    // Construire le message final selon la position
+    let finalMessage = '';
+    if (userMessage) {
+      if (messagePosition === 'before') {
+        finalMessage = `${userMessage} au ${serviceType} N°${number}`;
+      } else {
+        finalMessage = `${serviceType} N°${number} - ${userMessage}`;
+      }
+    } else {
+      finalMessage = `${serviceType} N°${number}`;
+    }
+
     try {
       const response = await this.apiCall('/commands', 'POST', {
         number,
-        counter_id,
-        message
+        message: finalMessage
       });
 
       if (response.success) {
-        this.showNotification(`Commande n°${number} envoyée !`, 'success');
+        this.showNotification(`Appel n°${number} envoyé !`, 'success');
         
         // Réinitialiser le formulaire
         numberEl.value = '';
         messageEl.value = '';
-        counterEl.value = '';
         
         // Recharger les données
         await this.loadDashboardData();
@@ -399,6 +411,22 @@ class RestaurantDashboard {
     }
   }
 
+  async sendNextCommand() {
+    const numberEl = document.getElementById('command-number');
+    const currentNumber = numberEl.value.trim();
+    
+    if (!currentNumber || !/^\d+$/.test(currentNumber)) {
+      this.showNotification('Entrez d\'abord un numéro pour calculer le suivant', 'error');
+      return;
+    }
+    
+    const nextNumber = (parseInt(currentNumber) + 1).toString();
+    numberEl.value = nextNumber;
+    
+    // Envoyer automatiquement le numéro suivant
+    await this.sendCommand();
+  }
+
   async completeCommand(commandId) {
     try {
       const response = await this.apiCall(`/commands/${commandId}`, 'PUT', {
@@ -406,7 +434,7 @@ class RestaurantDashboard {
       });
 
       if (response.success) {
-        this.showNotification('Commande terminée', 'success');
+        this.showNotification('Appel terminé', 'success');
         await this.loadDashboardData();
       } else {
         this.showNotification('Erreur lors de la mise à jour', 'error');
@@ -424,7 +452,7 @@ class RestaurantDashboard {
       });
 
       if (response.success) {
-        this.showNotification('Commande annulée', 'success');
+        this.showNotification('Appel annulé', 'success');
         await this.loadDashboardData();
       } else {
         this.showNotification('Erreur lors de l\'annulation', 'error');
@@ -514,7 +542,7 @@ class RestaurantDashboard {
   }
 
   bindEvents() {
-    // Envoi de commande avec Enter
+    // Envoi d'appel avec Enter
     document.addEventListener('keypress', (e) => {
       if (e.target.id === 'command-number' && e.key === 'Enter') {
         e.preventDefault();
@@ -533,10 +561,16 @@ class RestaurantDashboard {
   }
 }
 
-// Fonction globale pour l'envoi de commande (appelée depuis le HTML)
+// Fonctions globales (appelées depuis le HTML)
 function sendCommand() {
   if (window.dashboard) {
     window.dashboard.sendCommand();
+  }
+}
+
+function sendNextCommand() {
+  if (window.dashboard) {
+    window.dashboard.sendNextCommand();
   }
 }
 

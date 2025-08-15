@@ -1,5 +1,5 @@
 // JavaScript pour l'écran d'affichage TV
-// Gestion temps réel, animations et affichage des commandes
+// Gestion temps réel, animations et affichage des appels
 
 class DisplayScreen {
   constructor() {
