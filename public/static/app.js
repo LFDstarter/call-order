@@ -1,4 +1,4 @@
-// JavaScript principal pour le dashboard SaaS Restaurant Orders
+// JavaScript principal pour le dashboard Call Orders SaaS
 // Gestion moderne avec API calls, état local et UX fluide
 
 class RestaurantDashboard {
@@ -10,7 +10,7 @@ class RestaurantDashboard {
     
     // Configuration API
     this.apiBase = '/api';
-    this.token = localStorage.getItem('restaurant_orders_token');
+    this.token = localStorage.getItem('call_orders_token');
     
     this.init();
   }
@@ -38,7 +38,7 @@ class RestaurantDashboard {
             <div class="w-16 h-16 bg-white rounded-xl flex items-center justify-center mx-auto mb-4">
               <i class="fas fa-utensils text-purple-600 text-2xl"></i>
             </div>
-            <h1 class="text-2xl font-bold text-white mb-2">Restaurant Orders</h1>
+            <h1 class="text-2xl font-bold text-white mb-2">Call Orders</h1>
             <p class="text-gray-200">Connexion à votre dashboard</p>
           </div>
           
@@ -191,7 +191,7 @@ class RestaurantDashboard {
       if (response.success) {
         this.token = response.data.token;
         this.user = response.data.user;
-        localStorage.setItem('restaurant_orders_token', this.token);
+        localStorage.setItem('call_orders_token', this.token);
         
         this.showNotification('Connexion réussie !', 'success');
         location.reload(); // Recharger pour afficher le dashboard
@@ -215,7 +215,7 @@ class RestaurantDashboard {
       if (response.success) {
         this.token = response.data.token;
         this.user = response.data.user;
-        localStorage.setItem('restaurant_orders_token', this.token);
+        localStorage.setItem('call_orders_token', this.token);
         
         this.showNotification('Inscription réussie ! Bienvenue !', 'success');
         location.reload();
@@ -237,7 +237,7 @@ class RestaurantDashboard {
     
     this.token = null;
     this.user = null;
-    localStorage.removeItem('restaurant_orders_token');
+    localStorage.removeItem('call_orders_token');
     this.showLoginForm();
   }
 

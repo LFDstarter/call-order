@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "restaurant-orders-saas",
+  "name": "call-orders",
   "compatibility_date": "2025-08-15",
   "pages_build_output_dir": "./dist",
   "compatibility_flags": [
@@ -9,7 +9,7 @@
   "d1_databases": [
     {
       "binding": "DB",
-      "database_name": "restaurant-orders-production",
+      "database_name": "call-orders-production",
       "database_id": "local-dev-db"
     }
   ]

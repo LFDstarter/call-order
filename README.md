@@ -1,10 +1,11 @@
-# 🍽️ Restaurant Orders SaaS
+# 📞 Call Orders SaaS
 
-> **Système moderne de gestion des commandes restaurants avec affichage écran TV et annonces vocales**
+> **Système moderne de gestion des commandes restaurants avec affichage écran TV et annonces vocales**  
+> **Domaine de production** : `dashboard.call-order.com`
 
 ## 🚀 Vue d'ensemble du projet
 
-**Restaurant Orders SaaS** est une application web moderne construite avec **Hono** et **Cloudflare Workers** qui permet aux restaurants de gérer efficacement l'affichage des numéros de commandes prêtes sur des écrans externes avec support d'annonces vocales selon l'abonnement.
+**Call Orders** est une application web SaaS moderne construite avec **Hono** et **Cloudflare Workers** qui permet aux restaurants de gérer efficacement l'affichage des numéros de commandes prêtes sur des écrans externes avec support d'annonces vocales selon l'abonnement.
 
 ### ✨ Fonctionnalités principales réalisées
 
@@ -25,6 +26,11 @@
 - **Dashboard principal**: https://3000-iuy5y0c9vobulo5yppsd4-6532622b.e2b.dev
 - **API Health Check**: https://3000-iuy5y0c9vobulo5yppsd4-6532622b.e2b.dev/api/display/demo-user-1/ping
 - **Écran d'affichage démo**: https://3000-iuy5y0c9vobulo5yppsd4-6532622b.e2b.dev/display/demo-user-1
+
+### 🎯 Production (prévue)
+- **Dashboard**: https://dashboard.call-order.com
+- **API**: https://dashboard.call-order.com/api
+- **Écran TV**: https://dashboard.call-order.com/display/{userId}
 
 ### 🔧 API Endpoints principaux
 
@@ -97,7 +103,7 @@
 
 ### 🔐 Connexion
 1. **Compte démo disponible**:
-   - Email: `demo@restaurant-orders.com`
+   - Email: `demo@call-orders.com`
    - Mot de passe: `demo123`
    - Restaurant: "Restaurant Le Gourmet" (Plan PREMIUM)
 
@@ -159,7 +165,7 @@ curl http://localhost:3000
 - **API**: http://localhost:3000/api/*
 - **Écran TV**: http://localhost:3000/display/demo-user-1
 
-### 🚀 Déploiement production
+### 🚀 Déploiement production vers dashboard.call-order.com
 ```bash
 # Configuration Cloudflare (à faire)
 npm run db:create  # Créer DB production
@@ -215,7 +221,7 @@ npm run deploy:prod
 ### 🐛 Debug & logs
 ```bash
 # Logs PM2
-pm2 logs restaurant-orders-saas --nostream
+pm2 logs call-orders --nostream
 
 # Database locale
 npm run db:console:local
@@ -229,15 +235,39 @@ npm run db:reset
 - ⏳ Métriques Cloudflare (en production)
 - ⏳ Alertes downtime (à configurer)
 
+## 🎯 Plans d'abonnements
+
+### 🆓 BASIC (Gratuit)
+- ✅ Affichage numéros commandes
+- ✅ 1 guichet
+- ✅ Historique 30 jours
+- ✅ Support email
+
+### 🔥 PREMIUM (29€/mois)
+- ✅ Tout BASIC +
+- ✅ Annonces vocales personnalisées  
+- ✅ Multi-guichets illimités
+- ✅ Historique illimité
+- ✅ Personnalisation complète
+- ✅ Support prioritaire
+
+### 👑 GOLDEN (49€/mois)
+- ✅ Tout PREMIUM +
+- ✅ Vidéos publicitaires entre commandes
+- ✅ Analytics avancées détaillées
+- ✅ API webhooks
+- ✅ Support VIP dédié
+- ✅ Intégrations tierces
+
 ---
 
 ## 🎉 Résumé des réalisations
 
-**✨ Statut actuel : MVP FONCTIONNEL** 
+**✨ Statut actuel : MVP CALL ORDERS FONCTIONNEL** 
 
-Le SaaS Restaurant Orders est maintenant **opérationnel** avec toutes les fonctionnalités core implémentées :
+Le SaaS Call Orders est maintenant **opérationnel** avec toutes les fonctionnalités core implémentées :
 
-- 🏆 **Interface moderne** design professionnel
+- 🏆 **Interface moderne** design professionnel Call Orders
 - 🔐 **Authentification complète** inscription/connexion 
 - 💾 **Base de données robuste** schéma relationnel optimisé
 - 📱 **Dashboard intuitif** gestion commandes en temps réel
@@ -246,10 +276,11 @@ Le SaaS Restaurant Orders est maintenant **opérationnel** avec toutes les fonct
 - 📊 **Système abonnements** plans différenciés
 - 🔧 **API REST mature** endpoints documentés et testés
 
-**🚀 Prêt pour** : Tests utilisateur, démo client, déploiement production
+**🚀 Prêt pour** : Tests utilisateur, démo client, déploiement vers dashboard.call-order.com
 
 **📈 Prochaines étapes** : Intégration voix (ElevenLabs), WebSockets temps réel, features Golden (publicités vidéo)
 
 ---
 
-*Développé avec ❤️ par Jenaate - SaaS moderne pour restaurateurs*
+*Développé avec ❤️ par Jenaate - **Call Orders** SaaS moderne pour restaurateurs*  
+*🌐 Production: dashboard.call-order.com*

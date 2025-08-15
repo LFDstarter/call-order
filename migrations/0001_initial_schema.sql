@@ -1,4 +1,4 @@
--- Restaurant Orders SaaS - Schéma initial de base de données
+-- Call Orders SaaS - Schéma initial de base de données
 -- Créé pour gérer les restaurants, utilisateurs, commandes et systèmes d'abonnements
 
 -- Table des plans d'abonnement

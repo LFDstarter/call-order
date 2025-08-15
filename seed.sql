@@ -1,4 +1,4 @@
--- Données de test pour le SaaS Restaurant Orders
+-- Données de test pour Call Orders SaaS
 -- Plans d'abonnement
 
 INSERT OR IGNORE INTO plans (id, name, price, features, voice_enabled, multi_counter, ads_enabled) VALUES 
@@ -8,8 +8,8 @@ INSERT OR IGNORE INTO plans (id, name, price, features, voice_enabled, multi_cou
 
 -- Utilisateur demo pour test
 INSERT OR IGNORE INTO users (id, email, password, restaurant_name, plan_id, brand_color) VALUES 
-  ('demo-user-1', 'demo@restaurant-orders.com', 'demo123', 'Restaurant Le Gourmet', 'premium', '#10b981'),
-  ('demo-user-2', 'test@pizzaroma.com', 'test123', 'Pizza Roma', 'basic', '#f59e0b');
+  ('demo-user-1', 'demo@call-orders.com', '60df985aa02845dc330d1357c2693c25d1efe87cb5d1f5dbc3db42bc1dfab119', 'Restaurant Le Gourmet', 'premium', '#10b981'),
+  ('demo-user-2', 'test@pizzaroma.com', 'a9081b210d501c94db87340481c6f21429e169a2c28a35fa04843781cf021259', 'Pizza Roma', 'basic', '#f59e0b');
 
 -- Guichets pour les restaurants
 INSERT OR IGNORE INTO counters (id, user_id, name, color, position) VALUES 

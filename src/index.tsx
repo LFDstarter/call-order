@@ -30,7 +30,7 @@ app.get('/', (c) => {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Restaurant Orders - Dashboard SaaS</title>
+        <title>Call Orders - Dashboard SaaS</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
         <style>
@@ -54,7 +54,7 @@ app.get('/', (c) => {
                             <i class="fas fa-utensils text-purple-600 text-xl"></i>
                         </div>
                         <div>
-                            <h1 class="text-xl font-bold text-white">Restaurant Orders</h1>
+                            <h1 class="text-xl font-bold text-white">Call Orders</h1>
                             <p class="text-sm text-gray-200">SaaS Dashboard</p>
                         </div>
                     </div>
@@ -194,7 +194,7 @@ app.get('/display/:userId', async (c) => {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Écran d'Affichage - Restaurant Orders</title>
+        <title>Écran d'Affichage - Call Orders</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
         <style>
