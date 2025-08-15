@@ -1,21 +1,255 @@
-```txt
+# 🍽️ Restaurant Orders SaaS
+
+> **Système moderne de gestion des commandes restaurants avec affichage écran TV et annonces vocales**
+
+## 🚀 Vue d'ensemble du projet
+
+**Restaurant Orders SaaS** est une application web moderne construite avec **Hono** et **Cloudflare Workers** qui permet aux restaurants de gérer efficacement l'affichage des numéros de commandes prêtes sur des écrans externes avec support d'annonces vocales selon l'abonnement.
+
+### ✨ Fonctionnalités principales réalisées
+
+- ✅ **Dashboard moderne** - Interface utilisateur élégante avec effets de verre et animations
+- ✅ **Authentification sécurisée** - Système de connexion/inscription avec sessions
+- ✅ **Gestion des commandes** - CRUD complet pour créer, modifier, supprimer les commandes
+- ✅ **Multi-guichets** - Support de plusieurs comptoirs avec couleurs distinctives
+- ✅ **Écran d'affichage TV** - Page dédiée pour projection avec animations temps réel
+- ✅ **Système d'abonnements** - Plans BASIC, PREMIUM, GOLDEN avec fonctionnalités différenciées
+- ✅ **Base de données relationnelle** - Schéma complet avec Cloudflare D1 (SQLite)
+- ✅ **API REST complète** - Endpoints pour toutes les opérations CRUD
+- ✅ **Responsive design** - Interface adaptative mobile/tablet/desktop
+
+## 🌐 URLs d'accès
+
+### 🔗 URLs de développement
+
+- **Dashboard principal**: https://3000-iuy5y0c9vobulo5yppsd4-6532622b.e2b.dev
+- **API Health Check**: https://3000-iuy5y0c9vobulo5yppsd4-6532622b.e2b.dev/api/display/demo-user-1/ping
+- **Écran d'affichage démo**: https://3000-iuy5y0c9vobulo5yppsd4-6532622b.e2b.dev/display/demo-user-1
+
+### 🔧 API Endpoints principaux
+
+| Méthode | Endpoint | Description | Auth requis |
+|---------|----------|-------------|-------------|
+| `POST` | `/api/auth/login` | Connexion utilisateur | ❌ |
+| `POST` | `/api/auth/register` | Inscription utilisateur | ❌ |
+| `GET` | `/api/commands` | Liste des commandes | ✅ |
+| `POST` | `/api/commands` | Créer une commande | ✅ |
+| `PUT` | `/api/commands/:id` | Modifier une commande | ✅ |
+| `GET` | `/api/commands/stats` | Statistiques dashboard | ✅ |
+| `GET` | `/api/display/:userId` | Données écran TV | ❌ |
+| `GET` | `/api/users/profile` | Profil utilisateur | ✅ |
+| `GET` | `/api/users/counters` | Gestion guichets | ✅ |
+
+## 🏗️ Architecture des données
+
+### 📊 Modèles principaux
+
+#### Users (Restaurants)
+```sql
+- id (TEXT, PRIMARY KEY)
+- email (TEXT, UNIQUE)  
+- restaurant_name (TEXT)
+- plan_id (TEXT) → plans.id
+- brand_color (TEXT, par défaut #3b82f6)
+- logo_url (TEXT, optionnel)
+- voice_settings (JSON, optionnel)
+```
+
+#### Plans d'abonnement
+```sql
+- id (TEXT: basic/premium/golden)
+- name (TEXT: BASIC/PREMIUM/GOLDEN)
+- price (INTEGER: 0/2900/4900 centimes)
+- features (JSON)
+- voice_enabled, multi_counter, ads_enabled (BOOLEAN)
+```
+
+#### Commands (Commandes)
+```sql
+- id (TEXT, PRIMARY KEY)
+- number (TEXT, 1-4 caractères)
+- message (TEXT, optionnel)
+- user_id → users.id
+- counter_id → counters.id (optionnel)
+- status (active/completed/cancelled)
+- priority (INTEGER, 0 par défaut)
+- timestamps (created_at, updated_at, announced_at)
+```
+
+#### Counters (Guichets)
+```sql
+- id (TEXT, PRIMARY KEY)
+- user_id → users.id
+- name (TEXT: "Comptoir Principal", "Drive", etc.)
+- color (TEXT: couleur hex)
+- position (INTEGER, ordre d'affichage)
+- is_active (BOOLEAN)
+```
+
+### 🔄 Flow de données
+1. **Authentification** → Session token stocké 7 jours
+2. **Dashboard** → Chargement stats + commandes actives
+3. **Nouvelle commande** → Validation + insertion DB + refresh UI
+4. **Écran TV** → Polling API display toutes les 3-5 secondes
+5. **Gestion états** → Commandes active → completed/cancelled
+
+## 💻 Guide utilisateur
+
+### 🔐 Connexion
+1. **Compte démo disponible**:
+   - Email: `demo@restaurant-orders.com`
+   - Mot de passe: `demo123`
+   - Restaurant: "Restaurant Le Gourmet" (Plan PREMIUM)
+
+2. **Inscription** : Email + mot de passe + nom restaurant
+
+### 📱 Utilisation du dashboard
+1. **Vue d'ensemble** : Stats temps réel (commandes actives, total jour)
+2. **Envoi rapide** : 
+   - Numéro commande (1-4 caractères alphanumériques)
+   - Sélection guichet (optionnel)
+   - Message personnalisé (optionnel)
+   - Clic "Envoyer"
+3. **Gestion commandes** : Actions "Terminer" ✅ ou "Annuler" ❌
+4. **Écran TV** : Bouton "Ouvrir l'Écran d'Affichage" → nouvelle fenêtre
+
+### 📺 Écran d'affichage (TV)
+- **URL dédiée** : `/display/{userId}` 
+- **Auto-refresh** : Mise à jour automatique toutes les 3-5s
+- **Animations** : Transitions fluides, cartes avec couleurs guichets
+- **Indicateurs** : Heure de commande, priorité, statut guichet
+- **Responsive** : Adapté tous types d'écrans (TV, tablette, mobile)
+
+## 🔧 Développement & déploiement
+
+### 🛠️ Stack technique
+- **Backend**: Hono (framework web léger)
+- **Runtime**: Cloudflare Workers/Pages
+- **Database**: Cloudflare D1 (SQLite distribué)
+- **Frontend**: Vanilla JS + TailwindCSS + FontAwesome
+- **Build**: Vite
+- **Process Manager**: PM2
+- **Migrations**: Wrangler CLI
+
+### 📦 Installation & lancement
+```bash
+# Cloner et installer
+git clone <repo>
+cd webapp
 npm install
-npm run dev
+
+# Build initial
+npm run build
+
+# Migrations locales  
+npm run db:migrate:local
+npm run db:seed
+
+# Lancer en développement
+npm run clean-port
+pm2 start ecosystem.config.cjs
+
+# Vérifier le statut
+pm2 list
+curl http://localhost:3000
 ```
 
-```txt
-npm run deploy
+### 🌍 URLs de développement local
+- **Dashboard**: http://localhost:3000
+- **API**: http://localhost:3000/api/*
+- **Écran TV**: http://localhost:3000/display/demo-user-1
+
+### 🚀 Déploiement production
+```bash
+# Configuration Cloudflare (à faire)
+npm run db:create  # Créer DB production
+npm run db:migrate:prod  # Appliquer migrations
+
+# Déploiement
+npm run deploy:prod
 ```
 
-[For generating/synchronizing types based on your Worker configuration run](https://developers.cloudflare.com/workers/wrangler/commands/#types):
+## 📋 Statut du développement
 
-```txt
-npm run cf-typegen
+### ✅ Phase 1 - MVP Core (TERMINÉ)
+- ✅ Authentification + Dashboard de base
+- ✅ Envoi commandes simple
+- ✅ Écran affichage basique  
+- ✅ Système abonnements
+- ✅ API REST complète
+- ✅ Base de données relationnelle
+- ✅ Interface utilisateur moderne
+
+### 🔄 Phase 2 - Features Premium (EN COURS)
+- ⏳ Intégration voix ElevenLabs (prévu)
+- ✅ Multi-guichets (implémenté)
+- ✅ Personnalisation avancée (couleurs, logos)
+- ⏳ WebSockets temps réel (à implémenter)
+
+### 📅 Phase 3 - Golden Features (PLANIFIÉ)
+- ⏳ Système vidéos publicitaires
+- ⏳ Analytics avancées  
+- ⏳ Support client intégré
+- ⏳ Notifications push
+- ⏳ Intégration imprimantes
+
+## 🔐 Sécurité & bonnes pratiques
+
+### ✅ Mesures implémentées
+- **Hash passwords** avec salt personnalisé SHA-256
+- **Validation inputs** côté serveur avec sanitisation
+- **Sessions sécurisées** avec expiration 7 jours
+- **CORS configuré** pour API
+- **Rate limiting** (à implémenter)
+- **HTTPS only** en production
+
+### 🎯 Améliorations prévues
+- Rate limiting par IP/utilisateur
+- Validation email à l'inscription
+- 2FA optionnel pour comptes premium
+- Logs d'audit détaillés
+- Chiffrement données sensibles
+
+## 📞 Support & maintenance
+
+### 🐛 Debug & logs
+```bash
+# Logs PM2
+pm2 logs restaurant-orders-saas --nostream
+
+# Database locale
+npm run db:console:local
+
+# Reset complet
+npm run db:reset
 ```
 
-Pass the `CloudflareBindings` as generics when instantiation `Hono`:
+### 📊 Monitoring
+- ✅ Health check endpoint: `/api/display/:userId/ping`
+- ⏳ Métriques Cloudflare (en production)
+- ⏳ Alertes downtime (à configurer)
 
-```ts
-// src/index.ts
-const app = new Hono<{ Bindings: CloudflareBindings }>()
-```
+---
+
+## 🎉 Résumé des réalisations
+
+**✨ Statut actuel : MVP FONCTIONNEL** 
+
+Le SaaS Restaurant Orders est maintenant **opérationnel** avec toutes les fonctionnalités core implémentées :
+
+- 🏆 **Interface moderne** design professionnel
+- 🔐 **Authentification complète** inscription/connexion 
+- 💾 **Base de données robuste** schéma relationnel optimisé
+- 📱 **Dashboard intuitif** gestion commandes en temps réel
+- 📺 **Écran TV dédié** affichage automatique avec animations
+- 🎨 **Multi-guichets** couleurs et personnalisation
+- 📊 **Système abonnements** plans différenciés
+- 🔧 **API REST mature** endpoints documentés et testés
+
+**🚀 Prêt pour** : Tests utilisateur, démo client, déploiement production
+
+**📈 Prochaines étapes** : Intégration voix (ElevenLabs), WebSockets temps réel, features Golden (publicités vidéo)
+
+---
+
+*Développé avec ❤️ par Jenaate - SaaS moderne pour restaurateurs*

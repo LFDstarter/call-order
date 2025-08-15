@@ -1,0 +1,296 @@
+/* Styles CSS personnalisés pour Restaurant Orders SaaS */
+
+/* Variables CSS custom */
+:root {
+  --brand-color: #3b82f6;
+  --brand-color-light: #60a5fa;
+  --brand-color-dark: #2563eb;
+  --success-color: #10b981;
+  --warning-color: #f59e0b;
+  --error-color: #ef4444;
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+}
+
+/* Effets de verre modernisés */
+.glass-effect {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+.glass-effect:hover {
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+  transition: all 0.3s ease;
+}
+
+/* Gradients personnalisés */
+.gradient-bg {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #667eea 100%);
+  background-size: 400% 400%;
+  animation: gradient-shift 15s ease infinite;
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Boutons avec effets modernes */
+.modern-button {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.modern-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.modern-button:hover::before {
+  left: 100%;
+}
+
+.modern-button:active {
+  transform: scale(0.98);
+}
+
+/* Cards avec animations */
+.command-card {
+  transform: translateY(0);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.command-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+/* Animations d'apparition */
+.fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+.slide-up {
+  animation: slideUp 0.6s ease-out forwards;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0; 
+    transform: translateY(30px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+/* Pulse effect pour les éléments importants */
+.pulse-glow {
+  animation: pulseGlow 2s infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { 
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+  }
+  50% { 
+    box-shadow: 0 0 40px rgba(59, 130, 246, 0.6);
+  }
+}
+
+/* Écran d'affichage TV */
+.display-screen {
+  background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 30%, #581c87 70%, #1e1b4b 100%);
+  background-size: 400% 400%;
+  animation: gradient-shift 20s ease infinite;
+}
+
+/* États des commandes avec couleurs */
+.command-active {
+  border-left: 4px solid var(--success-color);
+}
+
+.command-priority {
+  border-left: 4px solid var(--error-color);
+  animation: priorityPulse 1.5s infinite;
+}
+
+@keyframes priorityPulse {
+  0%, 100% { border-left-color: var(--error-color); }
+  50% { border-left-color: #fca5a5; }
+}
+
+/* Notifications toast */
+.notification {
+  animation: slideInRight 0.3s ease-out, slideOutRight 0.3s ease-in 3.7s;
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideOutRight {
+  from { transform: translateX(0); opacity: 1; }
+  to { transform: translateX(100%); opacity: 0; }
+}
+
+/* Loading states */
+.loading {
+  position: relative;
+  overflow: hidden;
+}
+
+.loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Form enhancements */
+.form-input {
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.form-input:focus {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  transform: translateY(-1px);
+}
+
+/* Status indicators */
+.status-indicator {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.status-indicator::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.status-online::before {
+  background: var(--success-color);
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+  animation: pulse 2s infinite;
+}
+
+.status-offline::before {
+  background: var(--error-color);
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+  .glass-effect {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  
+  .command-card {
+    padding: 1rem;
+  }
+  
+  .gradient-bg {
+    background-attachment: fixed;
+  }
+}
+
+/* Dark theme optimizations */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --glass-bg: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.15);
+  }
+}
+
+/* Print styles (pour les rapports futurs) */
+@media print {
+  .glass-effect {
+    background: white !important;
+    backdrop-filter: none !important;
+    border: 1px solid #e5e7eb !important;
+  }
+  
+  .gradient-bg {
+    background: white !important;
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus states for keyboard navigation */
+.focusable:focus {
+  outline: 2px solid var(--brand-color);
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .glass-effect {
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid white;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
