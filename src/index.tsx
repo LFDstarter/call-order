@@ -30,17 +30,37 @@ app.get('/', (c) => {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Call Orders - Dashboard SaaS</title>
+        <title>Call Orders - Gestion des appels et files d'attente</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
         <style>
+          :root {
+            --primary-pink: #F72585;
+            --primary-magenta: #B5179E;
+            --primary-purple: #7209B7;
+            --primary-royal: #560BAD;
+            --primary-violet: #480CA8;
+            --secondary-blue-purple: #3A0CA3;
+            --secondary-blue: #3F37C9;
+            --secondary-bold-blue: #4361EE;
+            --secondary-moderate-blue: #4895EF;
+            --secondary-cyan: #4CC9F0;
+          }
           .glass-effect {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(114, 9, 183, 0.1);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(77, 201, 240, 0.2);
+            box-shadow: 0 8px 32px rgba(247, 37, 133, 0.1);
           }
           .gradient-bg {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--primary-pink) 0%, var(--primary-purple) 30%, var(--secondary-blue) 70%, var(--secondary-cyan) 100%);
+            background-size: 400% 400%;
+            animation: gradient-shift 15s ease infinite;
+          }
+          @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
           }
         </style>
     </head>
@@ -51,16 +71,16 @@ app.get('/', (c) => {
                 <div class="flex justify-between items-center py-4">
                     <div class="flex items-center space-x-3">
                         <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
-                            <i class="fas fa-utensils text-purple-600 text-xl"></i>
+                            <i class="fas fa-phone text-xl" style="color: var(--primary-purple);"></i>
                         </div>
                         <div>
                             <h1 class="text-xl font-bold text-white">Call Orders</h1>
-                            <p class="text-sm text-gray-200">SaaS Dashboard</p>
+                            <p class="text-sm text-gray-200">Gestion des appels & files d'attente</p>
                         </div>
                     </div>
                     <div class="flex items-center space-x-4">
-                        <div class="glass-effect px-3 py-2 rounded-lg text-white text-sm">
-                            <i class="fas fa-crown text-yellow-400 mr-2"></i>
+                        <div class="glass-effect px-3 py-2 rounded-lg text-white text-sm" style="background: linear-gradient(90deg, var(--primary-magenta), var(--secondary-bold-blue));">
+                            <i class="fas fa-crown mr-2" style="color: var(--secondary-cyan);"></i>
                             PREMIUM
                         </div>
                         <button class="glass-effect p-2 rounded-lg text-white hover:bg-white/20 transition-colors">
@@ -78,11 +98,11 @@ app.get('/', (c) => {
                 <div class="glass-effect rounded-xl p-6 text-white">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-gray-200 text-sm">Commandes actives</p>
+                            <p class="text-gray-200 text-sm">Appels actifs</p>
                             <p class="text-3xl font-bold" id="active-commands">3</p>
                         </div>
-                        <div class="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center">
-                            <i class="fas fa-clock text-xl"></i>
+                        <div class="w-12 h-12 rounded-lg flex items-center justify-center" style="background: var(--secondary-cyan);">
+                            <i class="fas fa-clock text-xl text-white"></i>
                         </div>
                     </div>
                 </div>
@@ -92,8 +112,8 @@ app.get('/', (c) => {
                             <p class="text-gray-200 text-sm">Total aujourd'hui</p>
                             <p class="text-3xl font-bold" id="total-today">27</p>
                         </div>
-                        <div class="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center">
-                            <i class="fas fa-chart-line text-xl"></i>
+                        <div class="w-12 h-12 rounded-lg flex items-center justify-center" style="background: var(--secondary-moderate-blue);">
+                            <i class="fas fa-chart-line text-xl text-white"></i>
                         </div>
                     </div>
                 </div>
@@ -103,8 +123,8 @@ app.get('/', (c) => {
                             <p class="text-gray-200 text-sm">Temps moyen</p>
                             <p class="text-3xl font-bold">4:32</p>
                         </div>
-                        <div class="w-12 h-12 bg-purple-500 rounded-lg flex items-center justify-center">
-                            <i class="fas fa-stopwatch text-xl"></i>
+                        <div class="w-12 h-12 rounded-lg flex items-center justify-center" style="background: var(--primary-magenta);">
+                            <i class="fas fa-stopwatch text-xl text-white"></i>
                         </div>
                     </div>
                 </div>
@@ -113,15 +133,15 @@ app.get('/', (c) => {
             <!-- Envoi rapide de commande -->
             <div class="glass-effect rounded-xl p-6 mb-8">
                 <h2 class="text-xl font-semibold text-white mb-6 flex items-center">
-                    <i class="fas fa-plus-circle mr-3 text-green-400"></i>
-                    Nouvelle Commande
+                    <i class="fas fa-plus-circle mr-3" style="color: var(--secondary-cyan);"></i>
+                    Nouvel Appel
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                     <div>
                         <input
                             type="text"
                             id="command-number"
-                            placeholder="N° commande"
+                            placeholder="N° d'appel"
                             class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             maxlength="4"
                         />
@@ -129,8 +149,8 @@ app.get('/', (c) => {
                     <div>
                         <select id="counter-select" class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
                             <option value="">Guichet</option>
-                            <option value="counter-1">Comptoir Principal</option>
-                            <option value="counter-2">Drive & Emporter</option>
+                            <option value="counter-1">Guichet Principal</option>
+                            <option value="counter-2">Guichet Express</option>
                         </select>
                     </div>
                     <div>
@@ -144,7 +164,8 @@ app.get('/', (c) => {
                     <div>
                         <button
                             onclick="sendCommand()"
-                            class="w-full bg-gradient-to-r from-green-500 to-blue-600 hover:from-green-600 hover:to-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105"
+                            class="w-full text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105"
+                            style="background: linear-gradient(135deg, var(--primary-magenta), var(--secondary-bold-blue)); box-shadow: 0 4px 15px rgba(247, 37, 133, 0.3);"
                         >
                             <i class="fas fa-paper-plane mr-2"></i>
                             Envoyer
@@ -156,8 +177,8 @@ app.get('/', (c) => {
             <!-- Liste des commandes actives -->
             <div class="glass-effect rounded-xl p-6">
                 <h2 class="text-xl font-semibold text-white mb-6 flex items-center">
-                    <i class="fas fa-list-ul mr-3 text-blue-400"></i>
-                    Commandes Actives
+                    <i class="fas fa-list-ul mr-3" style="color: var(--secondary-moderate-blue);"></i>
+                    Appels Actifs
                 </h2>
                 <div id="commands-list" class="space-y-4">
                     <!-- Les commandes seront chargées ici -->
@@ -198,8 +219,27 @@ app.get('/display/:userId', async (c) => {
         <script src="https://cdn.tailwindcss.com"></script>
         <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
         <style>
+          :root {
+            --primary-pink: #F72585;
+            --primary-magenta: #B5179E;
+            --primary-purple: #7209B7;
+            --primary-royal: #560BAD;
+            --primary-violet: #480CA8;
+            --secondary-blue-purple: #3A0CA3;
+            --secondary-blue: #3F37C9;
+            --secondary-bold-blue: #4361EE;
+            --secondary-moderate-blue: #4895EF;
+            --secondary-cyan: #4CC9F0;
+          }
           .display-screen {
-            background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 50%, #581c87 100%);
+            background: linear-gradient(135deg, var(--primary-violet) 0%, var(--secondary-blue-purple) 20%, var(--primary-royal) 50%, var(--secondary-blue) 80%, var(--primary-purple) 100%);
+            background-size: 400% 400%;
+            animation: gradient-shift 20s ease infinite;
+          }
+          @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
           }
           .command-card {
             animation: slideIn 0.5s ease-out;
@@ -224,7 +264,7 @@ app.get('/display/:userId', async (c) => {
             <div class="max-w-7xl mx-auto px-8 flex items-center justify-center">
                 <div class="text-center">
                     <h1 class="text-4xl font-bold text-white mb-2" id="restaurant-name">Restaurant Le Gourmet</h1>
-                    <p class="text-xl text-gray-200">Commandes Prêtes</p>
+                    <p class="text-xl text-gray-200">Appels en cours</p>
                 </div>
             </div>
         </header>
@@ -238,8 +278,8 @@ app.get('/display/:userId', async (c) => {
             <!-- Message quand aucune commande -->
             <div id="no-commands" class="text-center text-white py-16 hidden">
                 <i class="fas fa-check-circle text-6xl mb-6 text-green-400"></i>
-                <h2 class="text-3xl font-semibold mb-4">Toutes les commandes sont servies !</h2>
-                <p class="text-xl text-gray-300">Prêt pour les prochaines commandes...</p>
+                <h2 class="text-3xl font-semibold mb-4">Tous les appels sont traités !</h2>
+                <p class="text-xl text-gray-300">En attente des prochains appels...</p>
             </div>
         </main>
 

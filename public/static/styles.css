@@ -1,15 +1,30 @@
 /* Styles CSS personnalisés pour Call Orders SaaS */
 
-/* Variables CSS custom */
+/* Variables CSS custom - Purple Raindrops Palette */
 :root {
-  --brand-color: #3b82f6;
-  --brand-color-light: #60a5fa;
-  --brand-color-dark: #2563eb;
-  --success-color: #10b981;
-  --warning-color: #f59e0b;
-  --error-color: #ef4444;
-  --glass-bg: rgba(255, 255, 255, 0.1);
-  --glass-border: rgba(255, 255, 255, 0.2);
+  /* Palette principale Purple Raindrops */
+  --primary-pink: #F72585;
+  --primary-magenta: #B5179E;
+  --primary-purple: #7209B7;
+  --primary-royal: #560BAD;
+  --primary-violet: #480CA8;
+  --secondary-blue-purple: #3A0CA3;
+  --secondary-blue: #3F37C9;
+  --secondary-bold-blue: #4361EE;
+  --secondary-moderate-blue: #4895EF;
+  --secondary-cyan: #4CC9F0;
+  
+  /* Couleurs fonctionnelles */
+  --brand-color: var(--primary-purple);
+  --brand-color-light: var(--secondary-moderate-blue);
+  --brand-color-dark: var(--primary-violet);
+  --success-color: var(--secondary-cyan);
+  --warning-color: var(--primary-magenta);
+  --error-color: var(--primary-pink);
+  
+  /* Effets de verre avec couleurs adaptées */
+  --glass-bg: rgba(114, 9, 183, 0.1);
+  --glass-border: rgba(77, 201, 240, 0.2);
 }
 
 /* Effets de verre modernisés */
@@ -27,11 +42,27 @@
   transition: all 0.3s ease;
 }
 
-/* Gradients personnalisés */
+/* Gradients Purple Raindrops */
 .gradient-bg {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #667eea 100%);
+  background: linear-gradient(135deg, var(--primary-pink) 0%, var(--primary-purple) 30%, var(--secondary-blue) 70%, var(--secondary-cyan) 100%);
   background-size: 400% 400%;
   animation: gradient-shift 15s ease infinite;
+}
+
+.gradient-header {
+  background: linear-gradient(90deg, var(--primary-magenta) 0%, var(--primary-royal) 50%, var(--secondary-blue-purple) 100%);
+}
+
+.gradient-card {
+  background: linear-gradient(135deg, var(--secondary-blue-purple) 0%, var(--primary-violet) 100%);
+}
+
+.gradient-button {
+  background: linear-gradient(135deg, var(--primary-magenta) 0%, var(--secondary-bold-blue) 100%);
+}
+
+.gradient-accent {
+  background: linear-gradient(90deg, var(--secondary-cyan) 0%, var(--secondary-moderate-blue) 100%);
 }
 
 @keyframes gradient-shift {
@@ -119,9 +150,9 @@
   }
 }
 
-/* Écran d'affichage TV */
+/* Écran d'affichage TV avec Purple Raindrops */
 .display-screen {
-  background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 30%, #581c87 70%, #1e1b4b 100%);
+  background: linear-gradient(135deg, var(--primary-violet) 0%, var(--secondary-blue-purple) 20%, var(--primary-royal) 50%, var(--secondary-blue) 80%, var(--primary-purple) 100%);
   background-size: 400% 400%;
   animation: gradient-shift 20s ease infinite;
 }

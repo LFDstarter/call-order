@@ -1,4 +1,4 @@
-// JavaScript principal pour le dashboard Call Orders SaaS
+// JavaScript principal pour Call Orders - Gestion des appels et files d'attente
 // Gestion moderne avec API calls, état local et UX fluide
 
 class RestaurantDashboard {
@@ -36,10 +36,10 @@ class RestaurantDashboard {
         <div class="glass-effect rounded-2xl p-8 w-full max-w-md">
           <div class="text-center mb-8">
             <div class="w-16 h-16 bg-white rounded-xl flex items-center justify-center mx-auto mb-4">
-              <i class="fas fa-utensils text-purple-600 text-2xl"></i>
+              <i class="fas fa-phone text-2xl" style="color: #7209B7;"></i>
             </div>
             <h1 class="text-2xl font-bold text-white mb-2">Call Orders</h1>
-            <p class="text-gray-200">Connexion à votre dashboard</p>
+            <p class="text-gray-200">Connexion à votre espace de gestion</p>
           </div>
           
           <div id="auth-forms">
@@ -362,7 +362,7 @@ class RestaurantDashboard {
     const message = messageEl.value.trim() || null;
 
     if (!number) {
-      this.showNotification('Veuillez saisir un numéro de commande', 'error');
+      this.showNotification('Veuillez saisir un numéro d\'appel', 'error');
       return;
     }
 
@@ -379,7 +379,7 @@ class RestaurantDashboard {
       });
 
       if (response.success) {
-        this.showNotification(`Commande n°${number} envoyée !`, 'success');
+        this.showNotification(`Appel n°${number} créé !`, 'success');
         
         // Réinitialiser le formulaire
         numberEl.value = '';
@@ -404,7 +404,7 @@ class RestaurantDashboard {
       });
 
       if (response.success) {
-        this.showNotification('Commande terminée', 'success');
+        this.showNotification('Appel traité', 'success');
         await this.loadDashboardData();
       } else {
         this.showNotification('Erreur lors de la mise à jour', 'error');
@@ -422,7 +422,7 @@ class RestaurantDashboard {
       });
 
       if (response.success) {
-        this.showNotification('Commande annulée', 'success');
+        this.showNotification('Appel annulé', 'success');
         await this.loadDashboardData();
       } else {
         this.showNotification('Erreur lors de l\'annulation', 'error');

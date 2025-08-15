@@ -1,23 +1,33 @@
 # 📞 Call Orders SaaS
 
-> **Système moderne de gestion des commandes restaurants avec affichage écran TV et annonces vocales**  
+> **Système moderne de gestion des appels et files d'attente pour institutions**  
+> **Multi-secteurs** : Restaurants, Hôpitaux, Mairies, Banques, Centres d'accueil  
 > **Domaine de production** : `dashboard.call-order.com`
 
 ## 🚀 Vue d'ensemble du projet
 
-**Call Orders** est une application web SaaS moderne construite avec **Hono** et **Cloudflare Workers** qui permet aux restaurants de gérer efficacement l'affichage des numéros de commandes prêtes sur des écrans externes avec support d'annonces vocales selon l'abonnement.
+**Call Orders** est une application web SaaS moderne construite avec **Hono** et **Cloudflare Workers** qui permet aux institutions (restaurants, hôpitaux, mairies, banques, centres d'accueil) de gérer efficacement l'affichage des numéros d'appel et files d'attente sur des écrans externes avec support d'annonces vocales selon l'abonnement.
 
 ### ✨ Fonctionnalités principales réalisées
 
-- ✅ **Dashboard moderne** - Interface utilisateur élégante avec effets de verre et animations
+- ✅ **Dashboard moderne Purple Raindrops** - Interface utilisateur élégante avec palette cohérente
 - ✅ **Authentification sécurisée** - Système de connexion/inscription avec sessions
-- ✅ **Gestion des commandes** - CRUD complet pour créer, modifier, supprimer les commandes
-- ✅ **Multi-guichets** - Support de plusieurs comptoirs avec couleurs distinctives
+- ✅ **Gestion des appels** - CRUD complet pour créer, modifier, supprimer les appels
+- ✅ **Multi-guichets/services** - Support de plusieurs points de service avec couleurs distinctives
 - ✅ **Écran d'affichage TV** - Page dédiée pour projection avec animations temps réel
 - ✅ **Système d'abonnements** - Plans BASIC, PREMIUM, GOLDEN avec fonctionnalités différenciées
 - ✅ **Base de données relationnelle** - Schéma complet avec Cloudflare D1 (SQLite)
 - ✅ **API REST complète** - Endpoints pour toutes les opérations CRUD
 - ✅ **Responsive design** - Interface adaptative mobile/tablet/desktop
+
+### 🎯 Secteurs d'application
+
+- 🍽️ **Restaurants** - Commandes prêtes, drive, comptoirs
+- 🏥 **Hôpitaux** - Appels patients, consultations, urgences  
+- 🏛️ **Mairies** - Guichets services, rendez-vous, démarches
+- 🏦 **Banques** - Files d'attente, conseillers, services
+- 📞 **Centres d'appel** - Support client, tickets, interventions
+- 🏢 **Entreprises** - Accueil visiteurs, RH, réunions
 
 ## 🌐 URLs d'accès
 
