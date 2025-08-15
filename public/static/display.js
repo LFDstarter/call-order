@@ -9,6 +9,8 @@ class DisplayScreen {
     this.isOnline = true;
     this.refreshInterval = 5000; // 5 secondes
     this.lastUpdate = null;
+    this.advertisements = [];
+    this.adRotationInterval = 30000; // 30 secondes par défaut
     
     this.init();
   }
@@ -21,6 +23,11 @@ class DisplayScreen {
 
     // Charger les données initiales
     await this.loadDisplayData();
+    
+    // Charger les publicités si plan GOLDEN
+    if (this.displayData.ads_enabled) {
+      await this.loadAds();
+    }
     
     // Démarrer les mises à jour périodiques
     this.startPeriodicUpdates();
@@ -85,6 +92,11 @@ class DisplayScreen {
     if (this.commands.length === 0) {
       commandsContainer.innerHTML = '';
       noCommandsEl.classList.remove('hidden');
+      
+      // Afficher les publicités pour les plans GOLDEN
+      if (this.displayData.ads_enabled) {
+        this.showAdvertisement();
+      }
       return;
     }
 
@@ -303,19 +315,82 @@ class DisplayScreen {
     }
   }
 
-  // Gestion des publicités (plan GOLDEN)
+  // === SYSTÈME PUBLICITAIRE GOLDEN PLAN ===
+  
   async loadAds() {
     try {
       const response = await fetch(`/api/display/${this.userId}/ads`);
       const result = await response.json();
 
-      if (result.success) {
-        // Implémenter la logique des publicités
-        console.log('Ads loaded:', result.data);
+      if (result.success && result.data.ads) {
+        this.advertisements = result.data.ads;
+        this.adRotationInterval = result.data.rotation_interval || 30000;
+        console.log('Advertisements loaded:', this.advertisements.length);
       }
     } catch (error) {
       console.error('Error loading ads:', error);
+      this.advertisements = [];
     }
+  }
+
+  showAdvertisement() {
+    if (!this.advertisements || this.advertisements.length === 0) {
+      this.loadAds(); // Charger les pubs si pas encore fait
+      return;
+    }
+
+    const noCommandsEl = document.getElementById('no-commands');
+    if (!noCommandsEl) return;
+
+    // Sélectionner une pub aléatoire
+    const randomAd = this.advertisements[Math.floor(Math.random() * this.advertisements.length)];
+    
+    // Créer le contenu publicitaire
+    let adContent = '';
+    
+    if (randomAd.type === 'image') {
+      adContent = `
+        <div class="advertisement-container text-center py-12 animate-fade-in">
+          <div class="max-w-4xl mx-auto">
+            <img 
+              src="${randomAd.url}" 
+              alt="${randomAd.title || 'Publicité'}"
+              class="w-full max-h-96 object-contain rounded-2xl shadow-2xl mx-auto mb-6"
+            />
+            ${randomAd.title ? `<h2 class="text-3xl font-bold text-white mb-4">${randomAd.title}</h2>` : ''}
+            <p class="text-gray-200 text-lg">Publicité</p>
+          </div>
+        </div>
+      `;
+    } else if (randomAd.type === 'video') {
+      adContent = `
+        <div class="advertisement-container text-center py-12 animate-fade-in">
+          <div class="max-w-4xl mx-auto">
+            <video 
+              autoplay 
+              muted 
+              loop 
+              class="w-full max-h-96 object-contain rounded-2xl shadow-2xl mx-auto mb-6"
+            >
+              <source src="${randomAd.url}" type="video/mp4">
+              Votre navigateur ne supporte pas la vidéo.
+            </video>
+            ${randomAd.title ? `<h2 class="text-3xl font-bold text-white mb-4">${randomAd.title}</h2>` : ''}
+            <p class="text-gray-200 text-lg">Publicité</p>
+          </div>
+        </div>
+      `;
+    }
+
+    // Afficher la publicité dans la zone no-commands
+    noCommandsEl.innerHTML = adContent;
+    
+    // Programmer la rotation des publicités
+    setTimeout(() => {
+      if (this.commands.length === 0) { // Seulement si pas d'appels
+        this.showAdvertisement();
+      }
+    }, randomAd.duration || this.adRotationInterval);
   }
 }
 

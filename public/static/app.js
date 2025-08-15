@@ -375,16 +375,31 @@ class RestaurantDashboard {
       return;
     }
 
-    // Construire le message final selon la position
+    // Construire le message final selon la position et le type
     let finalMessage = '';
-    if (userMessage) {
-      if (messagePosition === 'before') {
-        finalMessage = `${userMessage} au ${serviceType} N°${number}`;
+    
+    if (serviceType === 'Numéro') {
+      // Numéro seulement - pas de type affiché
+      if (userMessage) {
+        if (messagePosition === 'before') {
+          finalMessage = `${userMessage} N°${number}`;
+        } else {
+          finalMessage = `N°${number} - ${userMessage}`;
+        }
       } else {
-        finalMessage = `${serviceType} N°${number} - ${userMessage}`;
+        finalMessage = `N°${number}`;
       }
     } else {
-      finalMessage = `${serviceType} N°${number}`;
+      // Avec type (Guichet, Commande, Client)
+      if (userMessage) {
+        if (messagePosition === 'before') {
+          finalMessage = `${userMessage} au ${serviceType} N°${number}`;
+        } else {
+          finalMessage = `${serviceType} N°${number} - ${userMessage}`;
+        }
+      } else {
+        finalMessage = `${serviceType} N°${number}`;
+      }
     }
 
     try {

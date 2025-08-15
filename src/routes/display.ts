@@ -59,7 +59,8 @@ displayRoutes.get('/:userId', async (c) => {
       brand_color: user.brand_color,
       logo_url: user.logo_url,
       current_commands: commands.results,
-      counters: counters.results
+      counters: counters.results,
+      ads_enabled: user.ads_enabled || false
     };
 
     return c.json(createApiResponse(true, displayData));

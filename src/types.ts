@@ -86,6 +86,7 @@ export interface DisplayData {
   logo_url?: string;
   current_commands: Command[];
   counters: Counter[];
+  ads_enabled?: boolean;
 }
 
 // Types d'entrée pour les API

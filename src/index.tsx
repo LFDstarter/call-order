@@ -159,55 +159,66 @@ app.get('/', (c) => {
                     </div>
                     Nouvel Appel
                 </h2>
-                <div class="grid grid-cols-1 md:grid-cols-6 gap-4">
-                    <div>
-                        <input
-                            type="text"
-                            id="command-number"
-                            placeholder="Numéro"
-                            class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 placeholder-gray-400 focus:outline-none focus:bg-white transition-all duration-200"
-                            style="focus:ring-2 focus:ring-aqua-primary focus:border-aqua-primary"
-                            maxlength="4"
-                        />
+                <div class="space-y-4">
+                    <!-- Ligne 1: Numéro et Type -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-600 mb-2">Numéro d'appel</label>
+                            <input
+                                type="text"
+                                id="command-number"
+                                placeholder="Numéro"
+                                class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 placeholder-gray-400 focus:outline-none focus:bg-white transition-all duration-200"
+                                maxlength="4"
+                            />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-600 mb-2">Type d'appel</label>
+                            <select id="service-type-select" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 focus:outline-none focus:bg-white transition-all duration-200">
+                                <option value="Guichet">Guichet</option>
+                                <option value="Commande">Commande</option>
+                                <option value="Client">Client</option>
+                                <option value="Numéro">Numéro seulement</option>
+                            </select>
+                        </div>
                     </div>
-                    <div>
-                        <select id="service-type-select" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 focus:outline-none focus:bg-white transition-all duration-200">
-                            <option value="Guichet">Guichet</option>
-                            <option value="Service">Service</option>
-                            <option value="Client">Client</option>
-                        </select>
+                    
+                    <!-- Ligne 2: Message et Position -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-600 mb-2">Message personnalisé</label>
+                            <input
+                                type="text"
+                                id="command-message"
+                                placeholder="Veuillez vous présenter, est prêt, etc."
+                                class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 placeholder-gray-400 focus:outline-none focus:bg-white transition-all duration-200"
+                            />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-600 mb-2">Position du message</label>
+                            <select id="message-position" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 focus:outline-none focus:bg-white transition-all duration-200">
+                                <option value="before">Message avant le numéro</option>
+                                <option value="after">Message après le numéro</option>
+                            </select>
+                        </div>
                     </div>
-                    <div>
-                        <input
-                            type="text"
-                            id="command-message"
-                            placeholder="Message (ex: Veuillez vous présenter)"
-                            class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 placeholder-gray-400 focus:outline-none focus:bg-white transition-all duration-200"
-                        />
-                    </div>
-                    <div>
-                        <select id="message-position" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 focus:outline-none focus:bg-white transition-all duration-200">
-                            <option value="before">Message avant</option>
-                            <option value="after">Message après</option>
-                        </select>
-                    </div>
-                    <div>
+                    
+                    <!-- Ligne 3: Boutons -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <button
                             onclick="sendCommand()"
                             class="btn-primary w-full font-semibold py-3 px-6 rounded-xl"
                         >
                             <i class="fas fa-paper-plane mr-2"></i>
-                            Envoyer
+                            Envoyer l'Appel
                         </button>
-                    </div>
-                    <div>
                         <button
                             onclick="sendNextCommand()"
                             class="btn-primary w-full font-semibold py-3 px-6 rounded-xl"
                             style="background: linear-gradient(135deg, #0C7489, #13505B);"
                         >
                             <i class="fas fa-arrow-right mr-2"></i>
-                            Suivant
+                            Numéro Suivant
                         </button>
                     </div>
                 </div>
