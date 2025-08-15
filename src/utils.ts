@@ -1,11 +1,10 @@
 // Utilitaires pour Call Orders SaaS
-import { v4 as uuidv4 } from 'uuid';
 
 /**
- * Génère un ID unique
+ * Génère un ID unique compatible Cloudflare Workers
  */
 export function generateId(): string {
-  return uuidv4();
+  return crypto.randomUUID();
 }
 
 /**

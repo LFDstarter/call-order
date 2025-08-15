@@ -22,10 +22,7 @@
     "git:commit": "git add . && git commit -m"
   },
   "dependencies": {
-    "hono": "^4.9.1",
-
-
-    "uuid": "^10.0.0"
+    "hono": "^4.9.1"
   },
   "devDependencies": {
     "@hono/vite-build": "^1.2.0",

@@ -1,4 +1,4 @@
-// JavaScript principal pour Call Orders - Gestion des appels et files d'attente
+// JavaScript principal pour Call Orders - Dashboard SaaS
 // Gestion moderne avec API calls, état local et UX fluide
 
 class RestaurantDashboard {
@@ -39,7 +39,7 @@ class RestaurantDashboard {
               <i class="fas fa-phone text-2xl" style="color: #7209B7;"></i>
             </div>
             <h1 class="text-2xl font-bold text-white mb-2">Call Orders</h1>
-            <p class="text-gray-200">Connexion à votre espace de gestion</p>
+            <p class="text-gray-200">Connexion à votre dashboard</p>
           </div>
           
           <div id="auth-forms">
@@ -362,7 +362,7 @@ class RestaurantDashboard {
     const message = messageEl.value.trim() || null;
 
     if (!number) {
-      this.showNotification('Veuillez saisir un numéro d\'appel', 'error');
+      this.showNotification('Veuillez saisir un numéro de commande', 'error');
       return;
     }
 
@@ -379,7 +379,7 @@ class RestaurantDashboard {
       });
 
       if (response.success) {
-        this.showNotification(`Appel n°${number} créé !`, 'success');
+        this.showNotification(`Commande n°${number} envoyée !`, 'success');
         
         // Réinitialiser le formulaire
         numberEl.value = '';
@@ -404,7 +404,7 @@ class RestaurantDashboard {
       });
 
       if (response.success) {
-        this.showNotification('Appel traité', 'success');
+        this.showNotification('Commande terminée', 'success');
         await this.loadDashboardData();
       } else {
         this.showNotification('Erreur lors de la mise à jour', 'error');
@@ -422,7 +422,7 @@ class RestaurantDashboard {
       });
 
       if (response.success) {
-        this.showNotification('Appel annulé', 'success');
+        this.showNotification('Commande annulée', 'success');
         await this.loadDashboardData();
       } else {
         this.showNotification('Erreur lors de l\'annulation', 'error');

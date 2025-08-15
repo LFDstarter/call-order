@@ -30,7 +30,7 @@ app.get('/', (c) => {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Call Orders - Gestion des appels et files d'attente</title>
+        <title>Call Orders - Dashboard SaaS</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
         <style>
@@ -47,15 +47,16 @@ app.get('/', (c) => {
             --secondary-cyan: #4CC9F0;
           }
           .glass-effect {
-            background: rgba(114, 9, 183, 0.1);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(77, 201, 240, 0.2);
-            box-shadow: 0 8px 32px rgba(247, 37, 133, 0.1);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(114, 9, 183, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
           }
           .gradient-bg {
-            background: linear-gradient(135deg, var(--primary-pink) 0%, var(--primary-purple) 30%, var(--secondary-blue) 70%, var(--secondary-cyan) 100%);
-            background-size: 400% 400%;
-            animation: gradient-shift 15s ease infinite;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+          }
+          .header-gradient {
+            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--secondary-bold-blue) 100%);
           }
           @keyframes gradient-shift {
             0% { background-position: 0% 50%; }
@@ -64,9 +65,9 @@ app.get('/', (c) => {
           }
         </style>
     </head>
-    <body class="min-h-screen gradient-bg">
+    <body class="min-h-screen bg-gray-50">
         <!-- Header moderne -->
-        <header class="glass-effect shadow-lg">
+        <header class="header-gradient shadow-lg">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between items-center py-4">
                     <div class="flex items-center space-x-3">
@@ -75,7 +76,7 @@ app.get('/', (c) => {
                         </div>
                         <div>
                             <h1 class="text-xl font-bold text-white">Call Orders</h1>
-                            <p class="text-sm text-gray-200">Gestion des appels & files d'attente</p>
+                            <p class="text-sm text-gray-100">SaaS Dashboard</p>
                         </div>
                     </div>
                     <div class="flex items-center space-x-4">
@@ -95,10 +96,10 @@ app.get('/', (c) => {
         <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <!-- Stats rapides -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                <div class="glass-effect rounded-xl p-6 text-white">
+                <div class="glass-effect rounded-xl p-6 text-gray-800">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-gray-200 text-sm">Appels actifs</p>
+                            <p class="text-gray-600 text-sm">Commandes actives</p>
                             <p class="text-3xl font-bold" id="active-commands">3</p>
                         </div>
                         <div class="w-12 h-12 rounded-lg flex items-center justify-center" style="background: var(--secondary-cyan);">
@@ -106,10 +107,10 @@ app.get('/', (c) => {
                         </div>
                     </div>
                 </div>
-                <div class="glass-effect rounded-xl p-6 text-white">
+                <div class="glass-effect rounded-xl p-6 text-gray-800">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-gray-200 text-sm">Total aujourd'hui</p>
+                            <p class="text-gray-600 text-sm">Total aujourd'hui</p>
                             <p class="text-3xl font-bold" id="total-today">27</p>
                         </div>
                         <div class="w-12 h-12 rounded-lg flex items-center justify-center" style="background: var(--secondary-moderate-blue);">
@@ -117,10 +118,10 @@ app.get('/', (c) => {
                         </div>
                     </div>
                 </div>
-                <div class="glass-effect rounded-xl p-6 text-white">
+                <div class="glass-effect rounded-xl p-6 text-gray-800">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-gray-200 text-sm">Temps moyen</p>
+                            <p class="text-gray-600 text-sm">Temps moyen</p>
                             <p class="text-3xl font-bold">4:32</p>
                         </div>
                         <div class="w-12 h-12 rounded-lg flex items-center justify-center" style="background: var(--primary-magenta);">
@@ -132,25 +133,25 @@ app.get('/', (c) => {
 
             <!-- Envoi rapide de commande -->
             <div class="glass-effect rounded-xl p-6 mb-8">
-                <h2 class="text-xl font-semibold text-white mb-6 flex items-center">
+                <h2 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
                     <i class="fas fa-plus-circle mr-3" style="color: var(--secondary-cyan);"></i>
-                    Nouvel Appel
+                    Nouvelle Commande
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                     <div>
                         <input
                             type="text"
                             id="command-number"
-                            placeholder="N° d'appel"
-                            class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            placeholder="N° commande"
+                            class="w-full px-4 py-3 bg-white border border-gray-200 rounded-lg text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
                             maxlength="4"
                         />
                     </div>
                     <div>
-                        <select id="counter-select" class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <select id="counter-select" class="w-full px-4 py-3 bg-white border border-gray-200 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500">
                             <option value="">Guichet</option>
-                            <option value="counter-1">Guichet Principal</option>
-                            <option value="counter-2">Guichet Express</option>
+                            <option value="counter-1">Comptoir Principal</option>
+                            <option value="counter-2">Drive & Emporter</option>
                         </select>
                     </div>
                     <div>
@@ -158,14 +159,14 @@ app.get('/', (c) => {
                             type="text"
                             id="command-message"
                             placeholder="Message (optionnel)"
-                            class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            class="w-full px-4 py-3 bg-white border border-gray-200 rounded-lg text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
                         />
                     </div>
                     <div>
                         <button
                             onclick="sendCommand()"
                             class="w-full text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105"
-                            style="background: linear-gradient(135deg, var(--primary-magenta), var(--secondary-bold-blue)); box-shadow: 0 4px 15px rgba(247, 37, 133, 0.3);"
+                            style="background: linear-gradient(135deg, var(--primary-purple), var(--secondary-bold-blue)); box-shadow: 0 4px 15px rgba(114, 9, 183, 0.3);"
                         >
                             <i class="fas fa-paper-plane mr-2"></i>
                             Envoyer
@@ -176,9 +177,9 @@ app.get('/', (c) => {
 
             <!-- Liste des commandes actives -->
             <div class="glass-effect rounded-xl p-6">
-                <h2 class="text-xl font-semibold text-white mb-6 flex items-center">
+                <h2 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
                     <i class="fas fa-list-ul mr-3" style="color: var(--secondary-moderate-blue);"></i>
-                    Appels Actifs
+                    Commandes Actives
                 </h2>
                 <div id="commands-list" class="space-y-4">
                     <!-- Les commandes seront chargées ici -->
@@ -264,7 +265,7 @@ app.get('/display/:userId', async (c) => {
             <div class="max-w-7xl mx-auto px-8 flex items-center justify-center">
                 <div class="text-center">
                     <h1 class="text-4xl font-bold text-white mb-2" id="restaurant-name">Restaurant Le Gourmet</h1>
-                    <p class="text-xl text-gray-200">Appels en cours</p>
+                    <p class="text-xl text-gray-200">Commandes Prêtes</p>
                 </div>
             </div>
         </header>
@@ -278,8 +279,8 @@ app.get('/display/:userId', async (c) => {
             <!-- Message quand aucune commande -->
             <div id="no-commands" class="text-center text-white py-16 hidden">
                 <i class="fas fa-check-circle text-6xl mb-6 text-green-400"></i>
-                <h2 class="text-3xl font-semibold mb-4">Tous les appels sont traités !</h2>
-                <p class="text-xl text-gray-300">En attente des prochains appels...</p>
+                <h2 class="text-3xl font-semibold mb-4">Toutes les commandes sont servies !</h2>
+                <p class="text-xl text-gray-300">Prêt pour les prochaines commandes...</p>
             </div>
         </main>
 
@@ -291,7 +292,7 @@ app.get('/display/:userId', async (c) => {
         </footer>
 
         <script>
-          const userId = '${userId}';
+          window.userId = '${userId}';
         </script>
         <script src="https://cdn.jsdelivr.net/npm/axios@1.6.0/dist/axios.min.js"></script>
         <script src="/static/display.js"></script>
