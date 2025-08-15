@@ -8,6 +8,32 @@
 
 **Call Orders** est une application web SaaS moderne construite avec **Hono** et **Cloudflare Workers** qui permet aux institutions (restaurants, hôpitaux, mairies, banques, centres d'accueil) de gérer efficacement l'affichage des numéros d'appel et files d'attente sur des écrans externes avec support d'annonces vocales selon l'abonnement.
 
+## 🌐 URLs du projet
+
+- **🚀 Application Live** : https://3000-iuy5y0c9vobulo5yppsd4-6532622b.e2b.dev
+- **📺 Écran TV Demo** : https://3000-iuy5y0c9vobulo5yppsd4-6532622b.e2b.dev/display/c7fc56d1-1da1-4d56-8e52-999c9a0baa8b
+- **📋 Repository GitHub** : https://github.com/LFDstarter/call-order
+- **🔍 API Health** : https://3000-iuy5y0c9vobulo5yppsd4-6532622b.e2b.dev/api/display/c7fc56d1-1da1-4d56-8e52-999c9a0baa8b/ping
+
+## 👤 Compte de démonstration
+
+- **Email** : `test-restaurant@test.com`
+- **Mot de passe** : `test123`
+- **Restaurant** : "Restaurant Test"
+
+## 📊 Statut du projet
+
+🟢 **FONCTIONNEL** - Le SaaS est 100% opérationnel avec toutes les fonctionnalités de base.
+
+**Dernière mise à jour** : 15 Août 2025  
+**Tests réussis** :
+- ✅ Authentification utilisateur
+- ✅ Création et affichage de commandes
+- ✅ API REST complète
+- ✅ Écran TV temps réel
+- ✅ Interface Purple Raindrops
+- ✅ Base de données D1 locale et migrations
+
 ### ✨ Fonctionnalités principales réalisées
 
 - ✅ **Dashboard moderne Purple Raindrops** - Interface utilisateur élégante avec palette cohérente

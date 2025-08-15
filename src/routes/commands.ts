@@ -97,7 +97,7 @@ commandRoutes.post('/', async (c) => {
     // Log de l'activité
     await c.env.DB.prepare(`
       INSERT INTO activity_log (id, user_id, action, details)
-      VALUES (?, ?, 'command_created', ?)
+      VALUES (?, ?, ?, ?)
     `).bind(
       generateId(), 
       user.id, 
@@ -186,7 +186,7 @@ commandRoutes.put('/:id', async (c) => {
     // Log de l'activité
     await c.env.DB.prepare(`
       INSERT INTO activity_log (id, user_id, action, details)
-      VALUES (?, ?, 'command_updated', ?)
+      VALUES (?, ?, ?, ?)
     `).bind(
       generateId(),
       user.id,
@@ -226,7 +226,7 @@ commandRoutes.delete('/:id', async (c) => {
     // Log de l'activité
     await c.env.DB.prepare(`
       INSERT INTO activity_log (id, user_id, action, details)
-      VALUES (?, ?, 'command_deleted', ?)
+      VALUES (?, ?, ?, ?)
     `).bind(
       generateId(),
       user.id,
