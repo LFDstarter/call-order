@@ -65,7 +65,8 @@ class RestaurantDashboard {
               </div>
               <button
                 type="submit"
-                class="w-full bg-gradient-to-r from-green-500 to-blue-600 hover:from-green-600 hover:to-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200"
+                class="w-full text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 transform hover:scale-[1.02]"
+                style="background: linear-gradient(135deg, #119DA4 0%, #0C7489 100%); box-shadow: 0 6px 20px rgba(17, 157, 164, 0.3);"
               >
                 Se connecter
               </button>
@@ -153,7 +154,8 @@ class RestaurantDashboard {
         </div>
         <button
           type="submit"
-          class="w-full bg-gradient-to-r from-green-500 to-blue-600 hover:from-green-600 hover:to-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200"
+          class="w-full text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 transform hover:scale-[1.02]"
+          style="background: linear-gradient(135deg, #0C7489 0%, #13505B 100%); box-shadow: 0 6px 20px rgba(12, 116, 137, 0.3);"
         >
           Créer mon compte
         </button>

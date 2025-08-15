@@ -35,28 +35,48 @@ app.get('/', (c) => {
         <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
         <style>
           :root {
-            --primary-pink: #F72585;
-            --primary-magenta: #B5179E;
-            --primary-purple: #7209B7;
-            --primary-royal: #560BAD;
-            --primary-violet: #480CA8;
-            --secondary-blue-purple: #3A0CA3;
-            --secondary-blue: #3F37C9;
-            --secondary-bold-blue: #4361EE;
-            --secondary-moderate-blue: #4895EF;
-            --secondary-cyan: #4CC9F0;
+            --aqua-primary: #119DA4;
+            --aqua-medium: #0C7489;
+            --aqua-dark: #13505B;
+            --aqua-black: #040404;
+            --aqua-gray: #D7D9CE;
+            --white: #ffffff;
+            --light-gray: #f8fafc;
+            --border-light: rgba(17, 157, 164, 0.1);
+            --shadow-soft: rgba(17, 157, 164, 0.15);
           }
           .glass-effect {
             background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(114, 9, 183, 0.1);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--border-light);
+            box-shadow: 0 8px 30px var(--shadow-soft);
           }
           .gradient-bg {
-            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            background: linear-gradient(135deg, var(--white) 0%, var(--light-gray) 100%);
           }
           .header-gradient {
-            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--secondary-bold-blue) 100%);
+            background: linear-gradient(135deg, var(--aqua-primary) 0%, var(--aqua-medium) 100%);
+          }
+          .btn-primary {
+            background: linear-gradient(135deg, var(--aqua-primary) 0%, var(--aqua-medium) 100%);
+            border: none;
+            color: white;
+            transition: all 0.3s ease;
+          }
+          .btn-primary:hover {
+            background: linear-gradient(135deg, var(--aqua-medium) 0%, var(--aqua-dark) 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(17, 157, 164, 0.4);
+          }
+          .stat-card {
+            background: var(--white);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+          }
+          .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px var(--shadow-soft);
           }
           @keyframes gradient-shift {
             0% { background-position: 0% 50%; }
@@ -71,20 +91,20 @@ app.get('/', (c) => {
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between items-center py-4">
                     <div class="flex items-center space-x-3">
-                        <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
-                            <i class="fas fa-phone text-xl" style="color: var(--primary-purple);"></i>
+                        <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-lg">
+                            <i class="fas fa-phone text-xl" style="color: var(--aqua-primary);"></i>
                         </div>
                         <div>
                             <h1 class="text-xl font-bold text-white">Call Orders</h1>
-                            <p class="text-sm text-gray-100">SaaS Dashboard</p>
+                            <p class="text-sm text-white/80">Modern SaaS Dashboard</p>
                         </div>
                     </div>
                     <div class="flex items-center space-x-4">
-                        <div class="glass-effect px-3 py-2 rounded-lg text-white text-sm" style="background: linear-gradient(90deg, var(--primary-magenta), var(--secondary-bold-blue));">
-                            <i class="fas fa-crown mr-2" style="color: var(--secondary-cyan);"></i>
+                        <div class="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-xl text-white text-sm border border-white/20">
+                            <i class="fas fa-crown mr-2 text-yellow-300"></i>
                             PREMIUM
                         </div>
-                        <button class="glass-effect p-2 rounded-lg text-white hover:bg-white/20 transition-colors">
+                        <button class="bg-white/10 backdrop-blur-sm p-2 rounded-xl text-white hover:bg-white/20 transition-all duration-200 border border-white/20">
                             <i class="fas fa-user-circle text-xl"></i>
                         </button>
                     </div>
@@ -94,47 +114,49 @@ app.get('/', (c) => {
 
         <!-- Contenu principal -->
         <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <!-- Stats rapides -->
+            <!-- Stats rapides avec design Aqua Whimsy -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                <div class="glass-effect rounded-xl p-6 text-gray-800">
+                <div class="stat-card p-6">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-gray-600 text-sm">Commandes actives</p>
-                            <p class="text-3xl font-bold" id="active-commands">3</p>
+                            <p class="text-gray-500 text-sm font-medium">Commandes actives</p>
+                            <p class="text-3xl font-bold mt-2" style="color: var(--aqua-dark);" id="active-commands">3</p>
                         </div>
-                        <div class="w-12 h-12 rounded-lg flex items-center justify-center" style="background: var(--secondary-cyan);">
+                        <div class="w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg" style="background: linear-gradient(135deg, var(--aqua-primary), var(--aqua-medium));">
                             <i class="fas fa-clock text-xl text-white"></i>
                         </div>
                     </div>
                 </div>
-                <div class="glass-effect rounded-xl p-6 text-gray-800">
+                <div class="stat-card p-6">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-gray-600 text-sm">Total aujourd'hui</p>
-                            <p class="text-3xl font-bold" id="total-today">27</p>
+                            <p class="text-gray-500 text-sm font-medium">Total aujourd'hui</p>
+                            <p class="text-3xl font-bold mt-2" style="color: var(--aqua-dark);" id="total-today">27</p>
                         </div>
-                        <div class="w-12 h-12 rounded-lg flex items-center justify-center" style="background: var(--secondary-moderate-blue);">
+                        <div class="w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg" style="background: linear-gradient(135deg, var(--aqua-medium), var(--aqua-dark));">
                             <i class="fas fa-chart-line text-xl text-white"></i>
                         </div>
                     </div>
                 </div>
-                <div class="glass-effect rounded-xl p-6 text-gray-800">
+                <div class="stat-card p-6">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-gray-600 text-sm">Temps moyen</p>
-                            <p class="text-3xl font-bold">4:32</p>
+                            <p class="text-gray-500 text-sm font-medium">Temps moyen</p>
+                            <p class="text-3xl font-bold mt-2" style="color: var(--aqua-dark);">4:32</p>
                         </div>
-                        <div class="w-12 h-12 rounded-lg flex items-center justify-center" style="background: var(--primary-magenta);">
+                        <div class="w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg" style="background: linear-gradient(135deg, var(--aqua-dark), var(--aqua-black));">
                             <i class="fas fa-stopwatch text-xl text-white"></i>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Envoi rapide de commande -->
-            <div class="glass-effect rounded-xl p-6 mb-8">
-                <h2 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
-                    <i class="fas fa-plus-circle mr-3" style="color: var(--secondary-cyan);"></i>
+            <!-- Envoi rapide de commande avec design Aqua Whimsy -->
+            <div class="stat-card p-6 mb-8">
+                <h2 class="text-xl font-semibold mb-6 flex items-center" style="color: var(--aqua-dark);">
+                    <div class="w-8 h-8 rounded-lg flex items-center justify-center mr-3" style="background: linear-gradient(135deg, var(--aqua-primary), var(--aqua-medium));">
+                        <i class="fas fa-plus text-white text-sm"></i>
+                    </div>
                     Nouvelle Commande
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -143,12 +165,13 @@ app.get('/', (c) => {
                             type="text"
                             id="command-number"
                             placeholder="N° commande"
-                            class="w-full px-4 py-3 bg-white border border-gray-200 rounded-lg text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                            class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 placeholder-gray-400 focus:outline-none focus:bg-white transition-all duration-200"
+                            style="focus:ring-2 focus:ring-aqua-primary focus:border-aqua-primary"
                             maxlength="4"
                         />
                     </div>
                     <div>
-                        <select id="counter-select" class="w-full px-4 py-3 bg-white border border-gray-200 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500">
+                        <select id="counter-select" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 focus:outline-none focus:bg-white transition-all duration-200">
                             <option value="">Guichet</option>
                             <option value="counter-1">Comptoir Principal</option>
                             <option value="counter-2">Drive & Emporter</option>
@@ -159,14 +182,13 @@ app.get('/', (c) => {
                             type="text"
                             id="command-message"
                             placeholder="Message (optionnel)"
-                            class="w-full px-4 py-3 bg-white border border-gray-200 rounded-lg text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                            class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 placeholder-gray-400 focus:outline-none focus:bg-white transition-all duration-200"
                         />
                     </div>
                     <div>
                         <button
                             onclick="sendCommand()"
-                            class="w-full text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105"
-                            style="background: linear-gradient(135deg, var(--primary-purple), var(--secondary-bold-blue)); box-shadow: 0 4px 15px rgba(114, 9, 183, 0.3);"
+                            class="btn-primary w-full font-semibold py-3 px-6 rounded-xl"
                         >
                             <i class="fas fa-paper-plane mr-2"></i>
                             Envoyer
@@ -176,9 +198,11 @@ app.get('/', (c) => {
             </div>
 
             <!-- Liste des commandes actives -->
-            <div class="glass-effect rounded-xl p-6">
-                <h2 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
-                    <i class="fas fa-list-ul mr-3" style="color: var(--secondary-moderate-blue);"></i>
+            <div class="stat-card p-6">
+                <h2 class="text-xl font-semibold mb-6 flex items-center" style="color: var(--aqua-dark);">
+                    <div class="w-8 h-8 rounded-lg flex items-center justify-center mr-3" style="background: linear-gradient(135deg, var(--aqua-medium), var(--aqua-dark));">
+                        <i class="fas fa-list text-white text-sm"></i>
+                    </div>
                     Commandes Actives
                 </h2>
                 <div id="commands-list" class="space-y-4">
@@ -190,7 +214,7 @@ app.get('/', (c) => {
             <div class="mt-8 text-center">
                 <button
                     onclick="openDisplayScreen()"
-                    class="glass-effect text-white px-8 py-4 rounded-xl hover:bg-white/20 transition-colors inline-flex items-center space-x-3"
+                    class="btn-primary px-8 py-4 rounded-xl inline-flex items-center space-x-3 shadow-lg"
                 >
                     <i class="fas fa-tv text-2xl"></i>
                     <span class="text-lg font-semibold">Ouvrir l'Écran d'Affichage</span>
@@ -221,19 +245,14 @@ app.get('/display/:userId', async (c) => {
         <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
         <style>
           :root {
-            --primary-pink: #F72585;
-            --primary-magenta: #B5179E;
-            --primary-purple: #7209B7;
-            --primary-royal: #560BAD;
-            --primary-violet: #480CA8;
-            --secondary-blue-purple: #3A0CA3;
-            --secondary-blue: #3F37C9;
-            --secondary-bold-blue: #4361EE;
-            --secondary-moderate-blue: #4895EF;
-            --secondary-cyan: #4CC9F0;
+            --aqua-primary: #119DA4;
+            --aqua-medium: #0C7489;
+            --aqua-dark: #13505B;
+            --aqua-black: #040404;
+            --aqua-gray: #D7D9CE;
           }
           .display-screen {
-            background: linear-gradient(135deg, var(--primary-violet) 0%, var(--secondary-blue-purple) 20%, var(--primary-royal) 50%, var(--secondary-blue) 80%, var(--primary-purple) 100%);
+            background: linear-gradient(135deg, var(--aqua-dark) 0%, var(--aqua-black) 20%, var(--aqua-medium) 50%, var(--aqua-primary) 80%, var(--aqua-medium) 100%);
             background-size: 400% 400%;
             animation: gradient-shift 20s ease infinite;
           }
@@ -244,7 +263,10 @@ app.get('/display/:userId', async (c) => {
           }
           .command-card {
             animation: slideIn 0.5s ease-out;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 25px 50px -12px rgba(4, 4, 4, 0.3);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(17, 157, 164, 0.2);
           }
           @keyframes slideIn {
             from { opacity: 0; transform: translateY(50px); }
@@ -254,8 +276,8 @@ app.get('/display/:userId', async (c) => {
             animation: pulse-glow 2s infinite;
           }
           @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 30px rgba(59, 130, 246, 0.3); }
-            50% { box-shadow: 0 0 50px rgba(59, 130, 246, 0.6); }
+            0%, 100% { box-shadow: 0 0 30px rgba(17, 157, 164, 0.4); }
+            50% { box-shadow: 0 0 50px rgba(17, 157, 164, 0.7); }
           }
         </style>
     </head>

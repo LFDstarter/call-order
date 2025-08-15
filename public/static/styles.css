@@ -1,68 +1,75 @@
-/* Styles CSS personnalisés pour Call Orders SaaS */
+/* Styles CSS personnalisés pour Call Orders SaaS - Aqua Whimsy Design */
 
-/* Variables CSS custom - Purple Raindrops Palette */
+/* Variables CSS custom - Aqua Whimsy Palette */
 :root {
-  /* Palette principale Purple Raindrops */
-  --primary-pink: #F72585;
-  --primary-magenta: #B5179E;
-  --primary-purple: #7209B7;
-  --primary-royal: #560BAD;
-  --primary-violet: #480CA8;
-  --secondary-blue-purple: #3A0CA3;
-  --secondary-blue: #3F37C9;
-  --secondary-bold-blue: #4361EE;
-  --secondary-moderate-blue: #4895EF;
-  --secondary-cyan: #4CC9F0;
+  /* Palette principale Aqua Whimsy */
+  --aqua-primary: #119DA4;
+  --aqua-medium: #0C7489;
+  --aqua-dark: #13505B;
+  --aqua-black: #040404;
+  --aqua-gray: #D7D9CE;
   
   /* Couleurs fonctionnelles */
-  --brand-color: var(--primary-purple);
-  --brand-color-light: var(--secondary-moderate-blue);
-  --brand-color-dark: var(--primary-violet);
-  --success-color: var(--secondary-cyan);
-  --warning-color: var(--primary-magenta);
-  --error-color: var(--primary-pink);
+  --brand-color: var(--aqua-primary);
+  --brand-color-light: var(--aqua-medium);
+  --brand-color-dark: var(--aqua-dark);
   
-  /* Effets de verre avec couleurs adaptées */
-  --glass-bg: rgba(114, 9, 183, 0.1);
-  --glass-border: rgba(77, 201, 240, 0.2);
+  /* Couleurs système */
+  --white: #ffffff;
+  --light-gray: #f8fafc;
+  --border-light: rgba(17, 157, 164, 0.15);
+  --shadow-soft: rgba(17, 157, 164, 0.2);
+  --glass-bg: rgba(255, 255, 255, 0.95);
 }
 
-/* Effets de verre modernisés */
+/* Reset et base */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--light-gray);
+  margin: 0;
+  padding: 0;
+}
+
+/* Glass morphism moderne */
 .glass-effect {
   background: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--glass-border);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
-}
-
-.glass-effect:hover {
-  background: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-light);
+  box-shadow: 0 8px 32px var(--shadow-soft);
   transition: all 0.3s ease;
 }
 
-/* Gradients Purple Raindrops */
+.glass-effect:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px var(--shadow-soft);
+}
+
+/* Gradients Aqua Whimsy */
 .gradient-bg {
-  background: linear-gradient(135deg, var(--primary-pink) 0%, var(--primary-purple) 30%, var(--secondary-blue) 70%, var(--secondary-cyan) 100%);
+  background: linear-gradient(135deg, var(--aqua-primary) 0%, var(--aqua-medium) 30%, var(--aqua-dark) 70%, var(--aqua-black) 100%);
   background-size: 400% 400%;
-  animation: gradient-shift 15s ease infinite;
+  animation: gradient-shift 20s ease infinite;
 }
 
 .gradient-header {
-  background: linear-gradient(90deg, var(--primary-magenta) 0%, var(--primary-royal) 50%, var(--secondary-blue-purple) 100%);
+  background: linear-gradient(135deg, var(--aqua-primary) 0%, var(--aqua-medium) 100%);
 }
 
 .gradient-card {
-  background: linear-gradient(135deg, var(--secondary-blue-purple) 0%, var(--primary-violet) 100%);
+  background: linear-gradient(135deg, var(--aqua-medium) 0%, var(--aqua-dark) 100%);
 }
 
 .gradient-button {
-  background: linear-gradient(135deg, var(--primary-magenta) 0%, var(--secondary-bold-blue) 100%);
+  background: linear-gradient(135deg, var(--aqua-primary) 0%, var(--aqua-medium) 100%);
 }
 
 .gradient-accent {
-  background: linear-gradient(90deg, var(--secondary-cyan) 0%, var(--secondary-moderate-blue) 100%);
+  background: linear-gradient(135deg, var(--aqua-medium) 0%, var(--aqua-dark) 100%);
 }
 
 @keyframes gradient-shift {
@@ -71,220 +78,134 @@
   100% { background-position: 0% 50%; }
 }
 
-/* Boutons avec effets modernes */
-.modern-button {
-  position: relative;
-  overflow: hidden;
+/* Boutons modernes */
+.btn-modern {
+  background: linear-gradient(135deg, var(--aqua-primary), var(--aqua-medium));
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-weight: 600;
+  cursor: pointer;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(17, 157, 164, 0.3);
 }
 
-.modern-button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.5s;
-}
-
-.modern-button:hover::before {
-  left: 100%;
-}
-
-.modern-button:active {
-  transform: scale(0.98);
-}
-
-/* Cards avec animations */
-.command-card {
-  transform: translateY(0);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.command-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-}
-
-/* Animations d'apparition */
-.fade-in {
-  animation: fadeIn 0.6s ease-out forwards;
-  opacity: 0;
-}
-
-.slide-up {
-  animation: slideUp 0.6s ease-out forwards;
-  opacity: 0;
-  transform: translateY(30px);
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes slideUp {
-  from { 
-    opacity: 0; 
-    transform: translateY(30px); 
-  }
-  to { 
-    opacity: 1; 
-    transform: translateY(0); 
-  }
-}
-
-/* Pulse effect pour les éléments importants */
-.pulse-glow {
-  animation: pulseGlow 2s infinite;
-}
-
-@keyframes pulseGlow {
-  0%, 100% { 
-    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
-  }
-  50% { 
-    box-shadow: 0 0 40px rgba(59, 130, 246, 0.6);
-  }
-}
-
-/* Écran d'affichage TV avec Purple Raindrops */
-.display-screen {
-  background: linear-gradient(135deg, var(--primary-violet) 0%, var(--secondary-blue-purple) 20%, var(--primary-royal) 50%, var(--secondary-blue) 80%, var(--primary-purple) 100%);
-  background-size: 400% 400%;
-  animation: gradient-shift 20s ease infinite;
-}
-
-/* États des commandes avec couleurs */
-.command-active {
-  border-left: 4px solid var(--success-color);
-}
-
-.command-priority {
-  border-left: 4px solid var(--error-color);
-  animation: priorityPulse 1.5s infinite;
-}
-
-@keyframes priorityPulse {
-  0%, 100% { border-left-color: var(--error-color); }
-  50% { border-left-color: #fca5a5; }
-}
-
-/* Notifications toast */
-.notification {
-  animation: slideInRight 0.3s ease-out, slideOutRight 0.3s ease-in 3.7s;
-}
-
-@keyframes slideInRight {
-  from { transform: translateX(100%); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
-}
-
-@keyframes slideOutRight {
-  from { transform: translateX(0); opacity: 1; }
-  to { transform: translateX(100%); opacity: 0; }
-}
-
-/* Loading states */
-.loading {
-  position: relative;
-  overflow: hidden;
-}
-
-.loading::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  animation: shimmer 1.5s infinite;
-}
-
-@keyframes shimmer {
-  0% { left: -100%; }
-  100% { left: 100%; }
-}
-
-/* Form enhancements */
-.form-input {
-  transition: all 0.3s ease;
-  background: rgba(255, 255, 255, 0.05);
-}
-
-.form-input:focus {
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+.btn-modern:hover {
+  background: linear-gradient(135deg, var(--aqua-medium), var(--aqua-dark));
   transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(17, 157, 164, 0.4);
 }
 
-/* Status indicators */
-.status-indicator {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
+/* Cards modernes */
+.card-modern {
+  background: var(--white);
+  border-radius: 16px;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
 }
 
-.status-indicator::before {
-  content: '';
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  margin-right: 8px;
+.card-modern:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(17, 157, 164, 0.15);
 }
 
-.status-online::before {
-  background: var(--success-color);
-  box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
-  animation: pulse 2s infinite;
+/* Inputs modernes */
+.input-modern {
+  background: rgba(248, 250, 252, 0.8);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  padding: 12px 16px;
+  transition: all 0.3s ease;
 }
 
-.status-offline::before {
-  background: var(--error-color);
-  box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+.input-modern:focus {
+  background: var(--white);
+  border-color: var(--aqua-primary);
+  box-shadow: 0 0 0 3px rgba(17, 157, 164, 0.1);
 }
 
-/* Responsive improvements */
+/* Animation fade-in */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* Responsive utilities */
 @media (max-width: 768px) {
   .glass-effect {
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    margin: 8px;
+    border-radius: 12px;
   }
   
-  .command-card {
-    padding: 1rem;
-  }
-  
-  .gradient-bg {
-    background-attachment: fixed;
+  .btn-modern {
+    padding: 14px 20px;
+    font-size: 14px;
   }
 }
 
-/* Dark theme optimizations */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --glass-bg: rgba(255, 255, 255, 0.08);
-    --glass-border: rgba(255, 255, 255, 0.15);
-  }
+/* Écran d'authentification */
+.auth-screen {
+  background: linear-gradient(135deg, var(--aqua-dark) 0%, var(--aqua-black) 50%, var(--aqua-medium) 100%);
+  background-size: 400% 400%;
+  animation: gradient-shift 25s ease infinite;
+  min-height: 100vh;
 }
 
-/* Print styles (pour les rapports futurs) */
-@media print {
-  .glass-effect {
-    background: white !important;
-    backdrop-filter: none !important;
-    border: 1px solid #e5e7eb !important;
-  }
-  
-  .gradient-bg {
-    background: white !important;
-  }
+.auth-form {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(17, 157, 164, 0.2);
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(4, 4, 4, 0.3);
 }
 
-/* Accessibility improvements */
+/* Icônes et éléments décoratifs */
+.icon-gradient {
+  background: linear-gradient(135deg, var(--aqua-primary), var(--aqua-medium));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Dashboard stats */
+.stat-number {
+  color: var(--aqua-dark);
+  font-weight: 800;
+}
+
+.stat-icon {
+  background: linear-gradient(135deg, var(--aqua-primary), var(--aqua-medium));
+  box-shadow: 0 4px 15px rgba(17, 157, 164, 0.3);
+}
+
+/* TV Display screen */
+.tv-screen {
+  background: linear-gradient(135deg, var(--aqua-dark) 0%, var(--aqua-black) 30%, var(--aqua-medium) 70%, var(--aqua-primary) 100%);
+  background-size: 400% 400%;
+  animation: gradient-shift 30s ease infinite;
+}
+
+.command-display-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(17, 157, 164, 0.2);
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(4, 4, 4, 0.2);
+}
+
+/* Accessibility */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;
@@ -293,35 +214,10 @@
   }
 }
 
-/* Focus states for keyboard navigation */
-.focusable:focus {
-  outline: 2px solid var(--brand-color);
-  outline-offset: 2px;
-}
-
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-  .glass-effect {
-    background: rgba(0, 0, 0, 0.8);
-    border: 2px solid white;
+/* Print styles */
+@media print {
+  .glass-effect, .gradient-bg, .gradient-header {
+    background: white !important;
+    color: black !important;
   }
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.5);
 }
